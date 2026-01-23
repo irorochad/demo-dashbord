@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import Script from "next/script";
+
 import type { Metadata } from "next";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -46,6 +48,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           {children}
           <Toaster />
         </PreferencesStoreProvider>
+        <Script
+          src="https://cdn.escourtly.com/escourtly-sdk.min.js"
+          data-api-key="ws_e4982a11707a4c439dc4fa504daa00ac"
+          data-api-url="https://api.escourtly.com"
+        ></Script>
       </body>
     </html>
   );
