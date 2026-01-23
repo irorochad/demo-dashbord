@@ -51,7 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <Script
           src="https://cdn.escourtly.com/escourtly-sdk.min.js"
           data-api-key="ws_e4982a11707a4c439dc4fa504daa00ac"
-          data-api-url="https://api.escourtly.com"
+          data-api-url="https://few-alfi-rekohq-8d5c8562.koyeb.app"
         ></Script>
       </body>
     </html>
