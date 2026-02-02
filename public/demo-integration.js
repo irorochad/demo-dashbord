@@ -25,9 +25,9 @@
     ESCOURTLY_KEYS.forEach((key) => {
       try {
         localStorage.removeItem(key);
-        console.log(`[DemoIntegration] Cleared ${key}`);
+        // console.log(`[DemoIntegration] Cleared ${key}`);
       } catch (error) {
-        console.warn(`[DemoIntegration] Failed to clear ${key}:`, error);
+        // console.warn(`[DemoIntegration] Failed to clear ${key}:`, error);
       }
     });
   }
@@ -38,7 +38,7 @@
    */
   function triggerEscourtlyTour(guideId) {
     if (!window.EscourtlySDK) {
-      console.warn("[DemoIntegration] Escourtly SDK not loaded yet");
+      // console.warn("[DemoIntegration] Escourtly SDK not loaded yet");
       return;
     }
 
@@ -47,18 +47,18 @@
 
     if (guideId === "auto") {
       // Let SDK automatically trigger guides for this page
-      console.log("[DemoIntegration] Triggering automatic guide");
+      // console.log("[DemoIntegration] Triggering automatic guide");
       // Force page reload to trigger automatic guides
       window.location.reload();
     } else {
       // Trigger specific guide
-      console.log("[DemoIntegration] Triggering guide:", guideId);
+      // console.log("[DemoIntegration] Triggering guide:", guideId);
 
       // Use the SDK's restart method if available
       if (typeof window.EscourtlySDK.restartGuide === "function") {
         window.EscourtlySDK.restartGuide(guideId);
       } else {
-        console.warn("[DemoIntegration] SDK restartGuide method not available");
+        // console.warn("[DemoIntegration] SDK restartGuide method not available");
       }
     }
   }
@@ -74,12 +74,12 @@
 
     switch (type) {
       case "START_DEMO_TOUR":
-        console.log("[DemoIntegration] Received START_DEMO_TOUR command");
+        // console.log("[DemoIntegration] Received START_DEMO_TOUR command");
         triggerEscourtlyTour(guideId || "auto");
         break;
 
       case "CLEAR_DEMO_STATE":
-        console.log("[DemoIntegration] Received CLEAR_DEMO_STATE command");
+        // console.log("[DemoIntegration] Received CLEAR_DEMO_STATE command");
         clearEscourtlyState();
         break;
 
@@ -95,7 +95,7 @@
   function notifyParentReady() {
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({ type: "DEMO_READY" }, "*");
-      console.log("[DemoIntegration] Notified parent: DEMO_READY");
+      // console.log("[DemoIntegration] Notified parent: DEMO_READY");
     }
   }
 
@@ -105,17 +105,17 @@
   function notifyTourCompleted() {
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({ type: "TOUR_COMPLETED" }, "*");
-      console.log("[DemoIntegration] Notified parent: TOUR_COMPLETED");
+      // console.log("[DemoIntegration] Notified parent: TOUR_COMPLETED");
     }
   }
 
   // Initialize
-  console.log("[DemoIntegration] Initializing demo integration...");
+  // console.log("[DemoIntegration] Initializing demo integration...");
 
   // 🎯 DEMO MODE: Auto-clear guide state on every page load
   // This ensures the demo guide always appears fresh for every visitor,
   // even if they completed it before or are returning to the demo
-  console.log("[DemoIntegration] Auto-clearing guide state for fresh demo experience");
+  // console.log("[DemoIntegration] Auto-clearing guide state for fresh demo experience");
   clearEscourtlyState();
 
   // Listen for postMessage from parent
@@ -132,7 +132,7 @@
   // This requires the SDK to dispatch custom events (you may need to modify SDK)
   window.addEventListener("escourtly:tour:completed", notifyTourCompleted);
 
-  console.log("[DemoIntegration] Demo integration ready");
+  // console.log("[DemoIntegration] Demo integration ready");
 
   // Expose utilities for debugging
   window.__demoIntegration = {
